@@ -13,4 +13,14 @@ public class TestApplication {
         return new InMemoryExpenseRepository();
     }
 
+    @Bean
+    public UserRepository userRepository() {
+        return new InMemoryUserRepository();
+    }
+
+    @Bean
+    public PresentExpenseUseCase presentExpenseUseCase() {
+        return new PresentExpenseUseCase(expenseRepository(), userRepository());
+    }
+
 }
