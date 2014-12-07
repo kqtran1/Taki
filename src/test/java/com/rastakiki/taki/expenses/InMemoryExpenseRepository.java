@@ -7,7 +7,7 @@ import java.util.List;
 
 public class InMemoryExpenseRepository implements ExpenseRepository {
 
-    private final List<Expense> expenses = new ArrayList<>();
+    private final List<Expense> expenses = new ArrayList<Expense>();
 
     @Override
     public List<Expense> findAllExpenses() {
