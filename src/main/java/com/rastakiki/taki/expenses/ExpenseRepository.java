@@ -8,6 +8,8 @@ public interface ExpenseRepository {
 
     void delete(Expense expense);
 
-    void findExpensesForUser(User user);
+    void save(Expense expense);
+
+    List<Expense> findExpensesByUser(User user);
 
 }

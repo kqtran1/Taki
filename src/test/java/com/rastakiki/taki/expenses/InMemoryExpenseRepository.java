@@ -1,6 +1,7 @@
 package com.rastakiki.taki.expenses;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,22 +10,33 @@ import java.util.Map;
 
 public class InMemoryExpenseRepository implements ExpenseRepository {
 
-    private final List<Expense> expenses = new ArrayList<Expense>();
     private final Map<User, List<Expense>> expensesByUser = new HashMap<User, List<Expense>>();
 
     @Override
     public List<Expense> findAllExpenses() {
-        return ImmutableList.copyOf(expenses);
+        return ImmutableList.copyOf(Iterables.concat(expensesByUser.values()));
     }
 
     @Override
     public void delete(Expense expense) {
-        expenses.remove(expense);
+
     }
 
     @Override
-    public void findExpensesForUser(User user) {
+    public void save(Expense expense) {
+        if (!expensesByUser.containsKey(expense.getUser())) {
+            expensesByUser.put(expense.getUser(), new ArrayList<Expense>());
+        }
+        expensesByUser.get(expense.getUser()).add(expense);
+    }
 
+    @Override
+    public List<Expense> findExpensesByUser(User user) {
+        final List<Expense> expenses = expensesByUser.get(user);
+        if(expenses == null) {
+            return ImmutableList.of();
+        }
+        return ImmutableList.copyOf(expenses);
     }
 
 }

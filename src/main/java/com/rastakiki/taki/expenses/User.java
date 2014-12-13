@@ -4,10 +4,15 @@ import java.util.Objects;
 
 public class User {
 
-    private String userName;
+    private final String userName;
+    private long id;
 
     public User(String userName) {
         this.userName = userName;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override
@@ -17,11 +22,12 @@ public class User {
 
         final User user = (User) o;
 
-        return Objects.equals(user.userName, this.userName);
+        return Objects.equals(user.id, this.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName);
+        return Objects.hash(id);
     }
+
 }

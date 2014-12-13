@@ -43,7 +43,7 @@ public class ExpenseStepDefinitions {
 
     @Then("^no expenses will be presented to the user \"(.*?)\"$")
     public void no_expenses_will_be_presented_to_the_user(String userName) throws Throwable {
-        final List<PresentableExpense> presentableExpenses = presentExpenseUseCase.getPresentableExpenses(userName);
+        final List<PresentableExpense> presentableExpenses = presentExpenseUseCase.getPresentableExpenses(new User(userName));
         assertThat(presentableExpenses).isEmpty();
     }
 
