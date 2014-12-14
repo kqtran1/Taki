@@ -7,6 +7,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExpenseStepDefinitions {
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private PresentExpenseUseCase presentExpenseUseCase;
     private ExpenseRepository expenseRepository;
     private UserRepository userRepository;
@@ -56,9 +59,9 @@ public class ExpenseStepDefinitions {
         final User user = userRepository.findUserByName(userName);
 
         final List<List<String>> rowList = expenses.raw();
-        for(int i = 1; i < rowList.size(); i++) {
+        for (int i = 1; i < rowList.size(); i++) {
             final List<String> row = rowList.get(i);
-            final Date date = dateFormat.parse(row.get(0));
+            final LocalDate date = LocalDate.parse(row.get(0), dateFormatter);
             final double amount = Double.valueOf(row.get(1));
             expenseRepository.save(new Expense(user, amount, date));
         }
@@ -72,9 +75,9 @@ public class ExpenseStepDefinitions {
 
         final List<List<String>> rowList = expectedExpenses.raw();
         assertThat(expenses).hasSize(rowList.size() - 1);
-        for(int i = 1; i < rowList.size(); i++) {
+        for (int i = 1; i < rowList.size(); i++) {
             final List<String> row = rowList.get(i);
-            final Date date = dateFormat.parse(row.get(0));
+            final LocalDate date = LocalDate.parse(row.get(0), dateFormatter);
             final double amount = Double.valueOf(row.get(1));
             final PresentableExpense currentExpense = expenses.get(i - 1);
             assertThat(currentExpense.getDate()).isEqualTo(date);

@@ -1,13 +1,13 @@
 package com.rastakiki.taki.expenses;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PresentableExpense {
 
     private final double amount;
-    private final Date date;
+    private final LocalDate date;
 
-    public PresentableExpense(double amount, Date date) {
+    public PresentableExpense(double amount, LocalDate date) {
         this.amount = amount;
         this.date = date;
     }
@@ -16,7 +16,7 @@ public class PresentableExpense {
         return amount;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 }

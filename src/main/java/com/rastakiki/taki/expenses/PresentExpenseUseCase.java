@@ -20,4 +20,5 @@ public class PresentExpenseUseCase {
                 .sorted((e1, e2) -> e2.getDate().compareTo(e1.getDate()))
                 .collect(Collectors.toList());
     }
+
 }

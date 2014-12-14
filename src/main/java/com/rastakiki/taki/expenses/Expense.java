@@ -1,15 +1,16 @@
 package com.rastakiki.taki.expenses;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Expense {
 
     private long id;
     private final User user;
     private final double amount;
-    private final Date date;
+    private final LocalDate date;
 
-    public Expense(User user, double amount, Date date) {
+    public Expense(User user, double amount, LocalDate date) {
         this.user = user;
         this.amount = amount;
         this.date = date;
@@ -23,7 +24,7 @@ public class Expense {
         return amount;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
