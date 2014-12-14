@@ -1,12 +1,11 @@
 package com.rastakiki.taki.expenses;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class InMemoryUserRepository implements UserRepository {
 
-    private final List<User> users = new ArrayList<User>();
+    private final Set<User> users = new HashSet<User>();
     private final AtomicLong userIdGenerator = new AtomicLong();
 
     @Override
@@ -17,6 +16,7 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public User findUserByName(String userName) {
-        return null;
+        final Optional<User> user = users.stream().filter(u -> u.getUserName().equals(userName)).findFirst();
+        return user.get();
     }
 }

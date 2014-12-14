@@ -1,13 +1,18 @@
 package com.rastakiki.taki.expenses;
 
+import java.util.Date;
+
 public class Expense {
 
+    private long id;
     private final User user;
-    private double amount;
+    private final double amount;
+    private final Date date;
 
-    public Expense(User user, double amount) {
+    public Expense(User user, double amount, Date date) {
         this.user = user;
         this.amount = amount;
+        this.date = date;
     }
 
     public User getUser() {
@@ -16,5 +21,13 @@ public class Expense {
 
     public double getAmount() {
         return amount;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class InMemoryExpenseRepository implements ExpenseRepository {
 
     private final Map<User, List<Expense>> expensesByUser = new HashMap<User, List<Expense>>();
+    private final AtomicLong idGenerator = new AtomicLong();
 
     @Override
     public List<Expense> findAllExpenses() {
@@ -25,8 +27,9 @@ public class InMemoryExpenseRepository implements ExpenseRepository {
     @Override
     public void save(Expense expense) {
         if (!expensesByUser.containsKey(expense.getUser())) {
-            expensesByUser.put(expense.getUser(), new ArrayList<Expense>());
+            expensesByUser.put(expense.getUser(), new ArrayList<>());
         }
+        expense.setId(idGenerator.getAndIncrement());
         expensesByUser.get(expense.getUser()).add(expense);
     }
 
