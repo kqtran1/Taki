@@ -6,11 +6,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +23,7 @@ public class ExpenseStepDefinitions {
     public void initUseCase() {
         expenseRepository = new InMemoryExpenseRepository();
         userRepository = new InMemoryUserRepository();
-        presentExpenseUseCase = new PresentExpenseUseCase(expenseRepository, userRepository);
+        presentExpenseUseCase = new PresentExpenseUseCase(expenseRepository);
 
     }
 

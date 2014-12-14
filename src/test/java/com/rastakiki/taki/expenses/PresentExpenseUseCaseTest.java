@@ -14,8 +14,7 @@ public class PresentExpenseUseCaseTest {
     @Test
     public void user_canViewItsExpensesOrderByDescDateOrder() {
         final ExpenseRepository expenseRepository = new InMemoryExpenseRepository();
-        final UserRepository userRepository = new InMemoryUserRepository();
-        final PresentExpenseUseCase userCase = new PresentExpenseUseCase(expenseRepository, userRepository);
+        final PresentExpenseUseCase userCase = new PresentExpenseUseCase(expenseRepository);
         final User user = new User("User");
         final Expense expense1 = new Expense(user, 20d, LocalDate.of(2014, Month.JANUARY, 10));
         final Expense expense2 = new Expense(user, 10d, LocalDate.of(2014, Month.AUGUST, 12));

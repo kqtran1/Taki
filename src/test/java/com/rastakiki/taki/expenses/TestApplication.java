@@ -20,7 +20,7 @@ public class TestApplication {
 
     @Bean
     public PresentExpenseUseCase presentExpenseUseCase() {
-        return new PresentExpenseUseCase(expenseRepository(), userRepository());
+        return new PresentExpenseUseCase(expenseRepository());
     }
 
 }

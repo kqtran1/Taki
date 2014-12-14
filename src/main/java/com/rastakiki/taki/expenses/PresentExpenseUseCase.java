@@ -6,11 +6,9 @@ import java.util.stream.Collectors;
 public class PresentExpenseUseCase {
 
     private final ExpenseRepository expenseRepository;
-    private final UserRepository userRepository;
 
-    public PresentExpenseUseCase(ExpenseRepository expenseRepository, UserRepository userRepository) {
+    public PresentExpenseUseCase(ExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
-        this.userRepository = userRepository;
     }
 
     public List<PresentableExpense> getPresentableExpenses(User user) {
